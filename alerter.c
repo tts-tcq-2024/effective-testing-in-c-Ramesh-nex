@@ -5,7 +5,7 @@ int alertFailureCount = 0;
 
 int networkAlertStub(float celcius)
 {
-    if(celcius > 100.0)
+    if(celcius > 500.0)
     {
         printf("ALERT: Temperature is %.1f celcius.\n", celcius);
         return 200;
