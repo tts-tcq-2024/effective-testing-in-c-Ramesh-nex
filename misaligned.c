@@ -20,6 +20,10 @@ int main() {
     FILE *old_stdout = stdout;
     stdout = stream;
 
+    fflush(stdout);
+    stdout = old_stdout;
+    fclose(stream);
+    
     const char* majorColor[] = {"White", "Red", "Black", "Yellow", "Violet"};
     const char* minorColor[] = {"Blue", "Orange", "Green", "Brown", "Slate"};
     char expectedOutput[4096];
