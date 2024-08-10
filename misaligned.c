@@ -15,7 +15,36 @@ int printColorMap() {
 
 int main() {
     int result = printColorMap();
-    assert(result == 20);
+    char buffer[4096]; 
+    FILE *stream = fmemopen(buffer, sizeof(buffer), "w");
+    if (stream == NULL)
+    {
+        perror("fmemopen");
+        return EXIT_FAILURE;
+    }
+
+    FILE *old_stdout = stdout;
+    stdout = stream;
+
+    int result = printColorMap();
+
+    fflush(stdout);
+    stdout = old_stdout;
+    fclose(stream);
+
+    const char* majorColor[] = {"White", "Red", "Black", "Yellow", "Violet"};
+    const char* minorColor[] = {"Blue", "Orange", "Green", "Brown", "Slate"};
+    char expectedOutput[4096];
+    int expectedLength = 0;
+    for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 5; j++) {
+            expectedLength += snprintf(expectedOutput + expectedLength, sizeof(expectedOutput) - expectedLength,
+                "%d | %s | %s\n", i * 5 + j, majorColor[i], minorColor[j]);
+        }
+    }
+
+    assert(strcmp(buffer, expectedOutput) == 0);
+    assert(result == 25);
     printf("All is well (maybe!)\n");
     return 0;
 }
