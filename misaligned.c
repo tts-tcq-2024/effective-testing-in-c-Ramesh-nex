@@ -20,12 +20,6 @@ int main() {
     FILE *old_stdout = stdout;
     stdout = stream;
 
-    int result = printColorMap();
-
-    fflush(stdout);
-    stdout = old_stdout;
-    fclose(stream);
-
     const char* majorColor[] = {"White", "Red", "Black", "Yellow", "Violet"};
     const char* minorColor[] = {"Blue", "Orange", "Green", "Brown", "Slate"};
     char expectedOutput[4096];
@@ -37,6 +31,9 @@ int main() {
         }
     }
 
+    
+    int result = printColorMap();
+    
     assert(strcmp(buffer, expectedOutput) == 0);
     assert(result == 25);
     printf("All is well (maybe!)\n");
