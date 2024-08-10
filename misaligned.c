@@ -30,10 +30,7 @@ int main() {
                 "%d | %s | %s\n", i * 5 + j, majorColor[i], minorColor[j]);
         }
     }
-
-    
     int result = printColorMap();
-    
     assert(strcmp(buffer, expectedOutput) == 0);
     assert(result == 25);
     printf("All is well (maybe!)\n");
