@@ -14,15 +14,9 @@ int printColorMap() {
 }
 
 int main() {
-    int result = printColorMap();
+
     char buffer[4096]; 
     FILE *stream = fmemopen(buffer, sizeof(buffer), "w");
-    if (stream == NULL)
-    {
-        perror("fmemopen");
-        return EXIT_FAILURE;
-    }
-
     FILE *old_stdout = stdout;
     stdout = stream;
 
